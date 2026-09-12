@@ -1,0 +1,20 @@
+[package]
+name = "starknet_aws_kms"
+version = "0.1.0"
+edition = "2024_07"
+
+[dependencies]
+starknet = "2.18.0"
+openzeppelin_account = "=3.0.0"
+openzeppelin_interfaces = "=2.1.0"
+openzeppelin_introspection = "=3.0.0"
+
+[dev-dependencies]
+snforge_std = "=0.60.0"
+
+[[target.starknet-contract]]
+sierra = true
+casm = true
+
+[tool.scarb]
+allow-prebuilt-plugins = ["snforge_std"]

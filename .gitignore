@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+contracts/target/
+contracts/.snfoundry_cache/
+.DS_Store
+*.log
+# Generated only during the opt-in live KMS verification.
+contracts/tests/test_live_kms.cairo
+contracts/preset/target/
+contracts/preset/.snfoundry_cache/
+contracts/preset/tests/test_live_kms.cairo

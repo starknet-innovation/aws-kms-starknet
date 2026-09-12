@@ -1,0 +1,10 @@
+{
+  "digest": "0x123",
+  "publicKey": "0x79be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798483ada7726a3c4655da4fbfc0e1108a8fd17b448a68554199c47d08ffb10d4b8",
+  "signature": [
+    "0xe2fdf5973a2e23c48e794aab593940dc",
+    "0xa43c24f6b898b5635ca9ce84f05ee2b0",
+    "0x77f4e0d585f7c4115bc66b28fc3e4717",
+    "0x5a3992725ed9be5d677212ff1e75b67f"
+  ]
+}

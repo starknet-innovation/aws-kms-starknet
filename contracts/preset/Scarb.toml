@@ -1,0 +1,19 @@
+[package]
+name = "kms_oz_preset"
+version = "0.1.0"
+edition = "2024_07"
+
+[dependencies]
+starknet = "=2.18.0"
+openzeppelin_presets = { git = "https://github.com/OpenZeppelin/cairo-contracts.git", rev = "4485016e27f71c3e95839a0cdac3d646512f6e15" }
+
+[dev-dependencies]
+snforge_std = "=0.60.0"
+
+[[target.starknet-contract]]
+sierra = true
+casm = true
+build-external-contracts = ["openzeppelin_presets::EthAccountUpgradeable"]
+
+[tool.scarb]
+allow-prebuilt-plugins = ["snforge_std"]
