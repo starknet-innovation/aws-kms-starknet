@@ -17,7 +17,7 @@ KMS signs the 32-byte Starknet transaction digest with `MessageType: DIGEST` and
 ## What you provide
 
 - An existing AWS KMS asymmetric key: `ECC_SECG_P256K1`, usage `SIGN_VERIFY`.
-- Credentials authorized for `kms:GetPublicKey` and `kms:Sign` on that key. Use your existing IAM role, AWS profile, or runtime credential injection. No AWS resources are provisioned by this project.
+- Credentials authorized for `kms:GetPublicKey` and `kms:Sign` on that key. Use your existing IAM role, AWS profile, or runtime credential injection. If you need these resources, use the optional setup command below.
 - Your own Starknet **mainnet** RPC endpoint compatible with Starknet.js 10.8.0 (RPC 0.9 or supported 0.10). The CLI checks `SN_MAIN` before using it for transactions.
 - STRK for transaction fees. The default OpenZeppelin class is already declared on mainnet; custom classes need a separate declaration through an existing funded account.
 
@@ -34,6 +34,26 @@ cp .env.example .env
 ```
 
 Fill `.env` from your existing infrastructure. Node loads it for CLI commands; already-set environment variables take precedence. AWS credentials use the SDK's default provider chain.
+
+### Create an AWS user and key from a root account
+
+With [AWS CLI v2](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) installed on macOS or Linux (or WSL), use an already authenticated root or administrator profile:
+
+```sh
+# Preview the target AWS account, region, user and files; creates nothing.
+npm run aws:setup -- --admin-profile YOUR_ROOT_PROFILE --region eu-west-1
+
+# Create the dedicated IAM user, KMS signing key and user access key.
+npm run aws:setup -- --admin-profile YOUR_ROOT_PROFILE --region eu-west-1 --apply
+
+# Save your current .env first if you already configured another account.
+cp ~/.aws/starknet-aws-kms/starknet-kms/.env .env
+npm run cli -- kms-check
+```
+
+The new user is named `starknet-kms`; use `--name YOUR_NAME` to change it. It has only `kms:GetPublicKey` and `kms:Sign` on the new key, with no console password. Credentials stay in a separate file under `~/.aws/starknet-aws-kms/YOUR_NAME/`; the generated `.env` points to that file. The helper never prints the secret, changes your existing AWS profiles, or overwrites the project's `.env`. AWS KMS charges apply.
+
+See [AWS setup and recovery](docs/aws-setup.md) for authentication, generated files, and partial-failure recovery. Existing infrastructure users can skip this step.
 
 ### Use the declared account class
 

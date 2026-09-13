@@ -13,7 +13,8 @@
     "verify": "npm run contracts:build && npm run preset:build && npm run build && npm test && npm run contracts:test && npm run preset:test",
     "test:kms": "npm run preset:build && node --env-file-if-exists=.env --import tsx tests/live-kms.ts",
     "preset:build": "scarb --manifest-path contracts/preset/Scarb.toml --release build",
-    "preset:test": "cd contracts/preset && snforge test --release"
+    "preset:test": "cd contracts/preset && snforge test --release",
+    "aws:setup": "node --import tsx scripts/setup-aws.ts"
   },
   "keywords": [],
   "author": "",
